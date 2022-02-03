@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <script type="text/javascript">
+function MyHead() {
+var list = new Array();
+list[0] = "50^<img src='fiveeuro.jpg'>";
+list[1] = "20^<img src='twintig.jpg'>";
+list[2] = "10^<img src='tien.jpg'>";
+list[3] = "5^<img src='5.jpg'>";
+list[4] = "2^<img src='2.jpg'>";
+list[5] = "1^<img src='1.jpg'>";
+list[6] = "0.50^<img src='50cent.jpg'>";
+list[7] = "0.20^<img src='o2.jpg'>";
+list[8] = "0.10^<img src='01.jpg'>";
+list[9] = "0.05^<img src='005.jpg'>";
+var j, k, find, item, page, repl;
+for (var i=0; i<list.length; i++) {
+item = list[i].split("^");
+find = item[0];
+repl = item[1];
+page = document.body.innerHTML;
+while (page.indexOf(find) >= 0) {
+var j = page.indexOf(find);
+var k = find.length;
+page = page.substr(0,j) + repl + page.substr(j+k);
+document.body.innerHTML = page;
+}
+}
+}
+</script>
+</head>
+<body onclick="MyHead()">
+<?php
+echo "Hoeveel geld wil je wisselen";
+echo "<form action='wisselgeld.php' method='POST'>
+<input type='text' name='geld'><br>
+<button type=submit name='wisselen'>wisselen</button>
+</form>";
+
+$ewa = $_POST['geld'];
+if (isset($_POST['wisselen'])) {
+    $getal = $ewa;
+
+    $wisselgeld = array(500, 200, 100, 50, 20, 10 , 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01);
+    
+    foreach ($wisselgeld as $value)
+    {
+      $rest  = floor($getal / $value);
+      if ($rest >= 1)
+      {
+        $getal = $getal - ($value * $rest);
+        if ($value >= 1)
+        {
+          echo "$rest x $value \n";
+        }
+        else
+        {
+          echo "$rest x $value \n";
+        }
+      }
+    }
+    
+}    
+    ?>  
+</body>
+</html>
+
+    
